@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local env / secrets
+.env
+.env.local
+.env.*.local
+*/.env
+*/.env.local
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Claude Code local state (per-developer)
+.claude/settings.local.json
+.claude/.session*
+
+# Raw design bundle (the unpacked copy lives in design_extract/)
+design_bundle.txt
+
+# Vite
+.vite/
