@@ -42,3 +42,9 @@ design_extract*/**/design.tar
 
 # Vite
 .vite/
+
+# Azure deployment artefacts
+.swa-token
+backend-deploy.zip
+deploy-tmp/
+zip_unix.py
