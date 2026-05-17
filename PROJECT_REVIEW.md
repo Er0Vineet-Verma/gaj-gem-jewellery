@@ -417,3 +417,81 @@ Because the `dark` class is applied to the `html` element rather than the `body`
 - Verified the footer now has clearer spacing and brighter content in both themes
 - `frontend`: `npm run build` succeeds
 - `backend`: `npm run lint` succeeds
+
+## Step 9 - Mobile high-fidelity design prompt
+
+### What was added
+
+- Created `MOBILE_HIGH_FIDELITY_DESIGN_PROMPT.md`
+- Expanded the GAJ design direction into a true mobile-first brief instead of a desktop-downscaled layout
+
+### The new mobile brief covers
+
+- target phone sizes and safe-area behavior
+- mobile visual language
+- typography scale
+- scroll transitions and motion timing
+- header / menu behavior
+- mobile homepage structure
+- catalogue, product-detail, and custom-flow patterns
+- sticky actions, carousels, filters, and touch targets
+- footer behavior
+- accessibility and performance
+- a full master prompt plus a shorter reusable prompt for design AI tools
+
+## Step 10 - Refined Atelier desktop pass (design bundle 1)
+
+Date: 2026-05-16
+
+### What landed
+
+Pulled the Anthropic design bundle `E-ae3ZNTaNXp10BQLU7auw` (Refined Indian Atelier prototype, eight pages) and ported the parts of the desktop design system the site was missing.
+
+- **Design tokens** — added `--maroon`, `--maroon-2`, `--gold`, `--gold-soft`, `--gold-deep`, `--hairline` / `-2`, theme-aware `--text-strong / -body / -mute / -faint`, and Inter Tight / Cormorant Garamond / EB Garamond / IBM Plex Mono / Noto Serif Devanagari font tokens. Aurora-layer classes were neutralised in line with the brief's "no constant aurora" rule.
+- **Component classes** — `.site-header`, `.header-strip`, `.nav-row`, `.icon-btn`, `.hero` and friends, `.marquee`, `.collection-tile`, `.pcard`, `.gem-chip`, `.btn-gold` / `-outline` / `-ink`, plus light-mode hero adjustments — all behind theme selectors so dark / light flip cleanly.
+- **Sections rebuilt** — `Header.tsx` (GAJ° mark + refined nav + announcement strip), `Hero.tsx` (eyebrow rule + oversized italic-accent headline + Devanagari subhead + two-column lead-and-meta grid + trust pills), `Marquee.tsx` (60-second hallmark scroll below hero).
+- **Removed** — the live-rates `<Ticker />` from above the header (rate now lives in the hero meta panel) and the `<GemStrip />` from the homepage (the Gemstones page at `/gems` already holds the full catalogue).
+
+### Fallback content
+
+- Added `frontend/src/lib/seedProducts.ts` so `FeaturedGrid` renders eight product cards immediately and only upgrades to live data when `/api/products` responds. The homepage never sees an empty "In the case this week" surface, even when the backend is offline.
+
+### Contrast follow-ups
+
+- Replaced the broken `.dark html, .dark body` selector with `html.dark` so theme tokens propagate via custom-property inheritance from the root element. Light mode uses `html:not(.dark)`.
+- Pushed light-mode header copy (logo mark, tagline, nav) to fully solid ink + weight 500–600.
+- Darkened the hero's Devanagari line + the `/ gram · 22K` price-unit suffix in light mode; removed the redundant "Build week 12 of 16" line under "Currently in studio".
+
+### Verification
+
+- `frontend`: `npm run build` succeeds (CSS 60 kB)
+
+## Step 11 - Mobile pass (design bundle 2)
+
+Date: 2026-05-17
+
+### What landed
+
+Pulled the Anthropic mobile design bundle `yYzI2e9zRHfbTr6-k8x3wA` (mobile-first prototypes for the same Refined Atelier direction, designed at 360 / 390 / 430 widths) and shipped a true mobile experience separate from the desktop tree.
+
+- **`useIsMobile()` hook** (`src/hooks/useIsMobile.ts`) — `matchMedia('(max-width: 720px)')` with live resize listener, SSR-safe default. Drives the entire mobile / desktop switch so layout swaps seamlessly when the viewport crosses the breakpoint.
+- **Mobile design system** (`src/mobile/mobile.css`, ~440 lines) — ported from `design_extract_mobile/gem/project/mobile-styles.css`. All classes prefixed `m-*` so they never conflict with desktop tokens. Reuses the same colour, gold, and Devanagari tokens from `index.css`. Tonal section flow (ink → maroon → ivory → maroon-2 → paper → ink → ivory) per the brief.
+- **Mobile shell** (`src/mobile/MobileShared.tsx`) — `MIcon`, `MobileHeader` (compact sticky), `MobileTicker` (rotating trust messages), `MobileMenu` (full-screen sheet with Devanagari labels, util links, theme toggle, WhatsApp), `MobileFooter` (accordion + newsletter), `MPCard` (2-col product card), `MReveal` (IntersectionObserver-based fade-up).
+- **`MobileHome.tsx`** — full scroll: full-bleed hero with grain + scroll cue → 2×2 trust grid → vertical collection stack → dark custom visualiser block (form / centre-stone chips, corner-framed preview, WhatsApp designer link) → atelier 4-step timeline → category chip row + 2-col product grid + editorial featured card → 3-step craft story → rotating testimonial (8 s) → dark CTA panel with WhatsApp + Call + showroom / atelier meta.
+- **`App.tsx`** branches on `isMobile`. Inner pages (PDP, Catalogue, Custom, Cart, Wishlist, Gems, About) render inside the mobile shell using their existing Tailwind `sm:` / `lg:` responsive utilities; full mobile redesigns for them are not in this pass.
+
+### Why it's not just a media-query collapse
+
+The brief explicitly calls out: *"Do not design a desktop site that merely collapses. Design a true mobile experience."* The mobile tree is a separate React subtree, not the desktop one CSS-stretched:
+
+- Different header (compact sticky vs. announcement-strip + desktop nav)
+- Different hero (full-bleed image with scroll cue and trustrow, not a two-column grid)
+- Different collections (vertical full-width stack with arrow capsule, not a 12-column collage)
+- Different custom block (chip selector + preview, not a journey-step list)
+- Different process timeline (italic numeral + Devanagari, not a hover-list)
+- Different footer (accordion, not multi-column grid)
+
+### Verification
+
+- `frontend`: `npm run build` succeeds (CSS 79 kB · JS 433 kB gzip 132 kB)
+- Toggled the Chrome device toolbar across iPhone SE / 14 Pro / 15 Pro Max — layout switches instantly at 720 px and stays at 78 svh hero across the three canvases.

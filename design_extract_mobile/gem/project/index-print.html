@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GAJ° · Gem &amp; Jewellery — Design Brief (Print)</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+Devanagari:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    /* ── Print layout ─────────────────────────────────────────── */
+    html, body { background: var(--maroon); }
+
+    .print-cover {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px;
+      background: linear-gradient(135deg, #1F0D12 0%, #100509 60%, #0b0507 100%);
+      break-after: page;
+      position: relative;
+      overflow: hidden;
+    }
+    .print-cover::before {
+      content:''; position:absolute; right:-200px; top:-200px;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(198,168,107,.18), transparent 65%);
+      pointer-events: none;
+    }
+    .cover-inner { width: 100%; max-width: 920px; position: relative; }
+    .cover-mark { font-family: var(--font-display); font-style: italic; font-size: 56px; color: var(--gold); letter-spacing: .04em; margin-bottom: 56px; }
+    .cover-mark sup { font-family: var(--font-mono); font-size: 18px; vertical-align: super; color: var(--gold-soft); font-style: normal; }
+    .cover-eyebrow {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold);
+      margin-bottom: 32px;
+    }
+    .cover-title { font-family: var(--font-display); font-size: 120px; line-height: .95; letter-spacing: -.01em; font-weight: 300; margin: 0; }
+    .cover-title em { font-style: italic; color: var(--gold); font-weight: 400; }
+    .cover-deva { font-family: var(--font-deva); font-size: 22px; color: var(--gold-soft); margin-top: 24px; }
+    .cover-sub { color: var(--text-body); max-width: 56ch; font-size: 19px; margin: 40px 0 56px; line-height: 1.55; }
+    .cover-toc { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 48px; max-width: 720px; }
+    .cover-toc li { display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: center; padding: 10px 0; border-top: 1px solid var(--hairline); }
+    .cover-toc .num { font-family: var(--font-mono); font-size: 12px; letter-spacing: .18em; color: var(--gold); }
+    .cover-toc .label { font-family: var(--font-display); font-size: 19px; }
+    .cover-foot {
+      position: absolute; left: 0; right: 0; bottom: -32px;
+      display: flex; justify-content: space-between;
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted);
+    }
+
+    .print-page { break-before: page; position: relative; }
+    .print-pageheader {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 32px;
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold);
+      background: #0b0507;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .print-pageheader .ph-mark { font-family: var(--font-display); font-style: italic; font-size: 18px; color: var(--gold); letter-spacing: .04em; }
+    .print-pageheader .ph-mark sup { font-size: 10px; vertical-align: super; }
+
+    /* Drop sticky on print so PDFs don't double-stack the header/sidebars */
+    .site-header { position: static !important; }
+    .pdp-side { position: static !important; }
+    .cart-summary { position: static !important; }
+    .custom-side { position: static !important; max-height: none !important; overflow: visible !important; }
+
+    /* Hide the dev Tweaks panel button entirely */
+    [data-tweaks-panel], #tweaks-panel-root, .tweaks-panel-root { display: none !important; }
+
+    @page {
+      size: A3;
+      margin: 0;
+    }
+
+    @media print {
+      html, body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        background: var(--maroon) !important;
+      }
+      .print-cover { break-after: page; page-break-after: always; }
+      .print-page { break-before: page; page-break-before: always; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+      .marquee-track { animation: none !important; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      .site-header { position: static !important; }
+      .pdp-side, .cart-summary, .custom-side { position: static !important; }
+      iframe { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script src="data.js"></script>
+
+  <!-- tweaks-panel.jsx still loaded so the components depending on useTweaks/Tweak* etc resolve, even though the panel is hidden -->
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="components.jsx"></script>
+  <script type="text/babel" src="page-home.jsx"></script>
+  <script type="text/babel" src="page-catalogue.jsx"></script>
+  <script type="text/babel" src="page-custom-cart-wish.jsx"></script>
+  <script type="text/babel" src="page-gems-about.jsx"></script>
+  <script type="text/babel" src="app-print.jsx"></script>
+</body>
+</html>

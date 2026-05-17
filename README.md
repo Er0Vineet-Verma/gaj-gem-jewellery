@@ -49,18 +49,33 @@ backend/
       newsletter.ts     POST /api/newsletter
 frontend/
   src/
-    App.tsx             Router shell
-    main.tsx            Providers + bootstrap
-    index.css           Design tokens + utilities
-    lib/api.ts          Typed API client with x-session-id
-    lib/format.ts       inr() · waLink() · WhatsApp constants
-    hooks/useReveal.ts  Scroll-reveal
-    contexts/           Toast · Wishlist · Cart (session-backed)
-    components/         Icon · Header · Footer · MobileNav · CartDrawer · SearchModal · Ticker · WhatsAppFAB · ProductCard
-    sections/           Hero · GemStrip · Builder · HowItWorks · CorePaths · FeaturedGrid · CraftTrust · Gallery · CTA
-    pages/              Home · ProductList · ProductDetail · CustomDesign · Cart · Wishlist · Gems · About · NotFound
-AZURE_DEPLOY.md         Two-tier Azure deploy (Static Web App + App Service)
+    App.tsx                 Router shell · branches on useIsMobile() for mobile vs desktop tree
+    main.tsx                Providers + bootstrap · imports index.css and mobile/mobile.css
+    index.css               Desktop design tokens + component classes
+    lib/api.ts              Typed API client with x-session-id
+    lib/format.ts           inr() · waLink() · WhatsApp constants
+    lib/seedProducts.ts     Fallback products so featured surfaces never render empty
+    hooks/useReveal.ts      Scroll-reveal
+    hooks/useIsMobile.ts    matchMedia('(max-width: 720px)') with live resize listener
+    contexts/               Toast · Wishlist · Cart (session-backed) · Theme
+    components/             Icon · Header · Footer · MobileNav · CartDrawer · SearchModal · Ticker · WhatsAppFAB · ProductCard
+    sections/               Hero · Marquee · CorePaths · HowItWorks · FeaturedGrid · CraftTrust · Gallery · Testimonials · CTA
+    pages/                  Home · ProductList · ProductDetail · CustomDesign · Cart · Wishlist · Gems · About · NotFound
+    mobile/                 mobile.css · MobileShared.tsx · MobileShell.tsx · MobileHome.tsx
+AZURE_DEPLOY.md             Two-tier Azure deploy (Static Web App + App Service)
+HIGH_FIDELITY_DESIGN_BRIEF.md
+MOBILE_HIGH_FIDELITY_DESIGN_PROMPT.md
+PROJECT_REVIEW.md           Step-by-step history of design / build passes
 ```
+
+## Responsive behaviour
+
+The site renders two different React trees depending on viewport width — a clean break, not a media-query collapse.
+
+- **`> 720 px` (desktop):** the existing `Header` + `Hero` + `Marquee` + section flow + `Footer`, exactly as designed in the Refined Atelier desktop brief.
+- **`≤ 720 px` (mobile):** `MobileHeader` (compact sticky) + `MobileTicker` (rotating trust line) + `MobileHome` (full mobile scroll: full-bleed hero → trust grid → collection stack → custom visualiser → atelier timeline → 2-col products + editorial card → craft story → testimonial → CTA) + `MobileFooter` (accordion).
+
+The switch is driven by `hooks/useIsMobile.ts` and rebinds live on resize, so users dragging a desktop window narrower see the layout swap in real time. Tap targets, hero height, and section padding are all tuned for the 360 / 390 / 430 px canvases from the mobile design bundle.
 
 ## Design system
 

@@ -34,6 +34,11 @@ Thumbs.db
 
 # Raw design bundle (the unpacked copy lives in design_extract/)
 design_bundle.txt
+# Print/PDF exports from the design tool — generated artefact, not source
+design.pdf
+design*.pdf
+# Working tarballs left next to extracted design bundles
+design_extract*/**/design.tar
 
 # Vite
 .vite/
