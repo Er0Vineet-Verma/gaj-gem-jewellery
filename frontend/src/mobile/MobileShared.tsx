@@ -179,8 +179,8 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
         </a>
       </div>
       <div className="foot">
-        <div>MG Road, Bangalore · Mon–Sat 11–8</div>
-        <div style={{ marginTop: 6 }}>Atelier · Johari Bazaar, Jaipur</div>
+        <div>Nahan, Himachal Pradesh · Mon–Sat 11–8</div>
+        <div style={{ marginTop: 6 }}>By appointment · WhatsApp anytime</div>
       </div>
     </div>
   );
@@ -191,7 +191,7 @@ const FOOTER_GROUPS: { id: string; h: string; items: string[] }[] = [
   { id: 'shop',    h: 'Shop',    items: ['All Jewellery', 'Bridal', 'Everyday Gold', 'Gemstones', 'Heirloom'] },
   { id: 'atelier', h: 'Atelier', items: ['Custom Design', 'The Studio', 'Book Appointment', 'Live Gold Rate', 'Stories from the Bench'] },
   { id: 'service', h: 'Service', items: ['Shipping & Returns', 'Resizing', 'Lifetime Polish', 'Certification', 'Care Guide'] },
-  { id: 'contact', h: 'Contact', items: ['+91 98160 24887', 'WhatsApp a designer', 'hello@gemandjewellery.in', 'MG Road · Bangalore'] },
+  { id: 'contact', h: 'Contact', items: ['+91 98160 24887', 'WhatsApp a designer', 'hello@gemandjewellery.in', 'Nahan · Himachal Pradesh'] },
 ];
 export function MobileFooter() {
   const [openIds, setOpenIds] = useState<string[]>(['shop']);
@@ -200,7 +200,7 @@ export function MobileFooter() {
     <footer className="m-footer">
       <div className="lockup">
         <div className="mark">GAJ<sup>°</sup></div>
-        <p>A family atelier for custom Indian jewellery. Sketched in Jaipur, made by hand, sold in our showroom at MG Road, Bangalore.</p>
+        <p>A family atelier for custom Indian jewellery. Hand-sketched, hand-made, sold in our studio in Nahan, Himachal Pradesh.</p>
         <div className="socials">
           <a aria-label="Instagram"><MIcon name="instagram" size={18} /></a>
           <a aria-label="WhatsApp" href="https://wa.me/919816024887" target="_blank" rel="noreferrer"><MIcon name="whatsapp" size={18} /></a>
@@ -238,7 +238,7 @@ export function MobileFooter() {
       </div>
       <div className="bot">
         <span>© 1995–2026 GAJ · Gem &amp; Jewellery Pvt. Ltd.</span>
-        <span>Made in Bangalore · Sketched in Jaipur</span>
+        <span>Made in Nahan, Himachal Pradesh</span>
         <span>Privacy · Terms · BIS Hallmark Notice</span>
       </div>
       <div className="safe-pad" />

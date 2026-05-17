@@ -25,14 +25,14 @@ const COLLECTIONS = [
 const ATELIER_STEPS = [
   { n: '01', nm: 'Sketched',          dv: 'रेखाचित्र', ds: 'On paper, in the studio, with the person who will wear it. No CAD until the line is right.' },
   { n: '02', nm: 'Stoned',            dv: 'रत्न चयन',  ds: 'Coloured stones above a carat carry GIA or GRS. Our buyer travels to source twice a year.' },
-  { n: '03', nm: 'Set',               dv: 'जड़ाई',     ds: 'Cast in 22K or 18K, struck at the Mumbai assay office, set by hand in Jaipur.' },
+  { n: '03', nm: 'Set',               dv: 'जड़ाई',     ds: 'Cast in 22K or 18K, BIS-hallmarked, set by hand in our Nahan studio.' },
   { n: '04', nm: 'Polished, forever', dv: 'पॉलिश',     ds: 'Lifetime polish and resize, in our showroom. The piece keeps coming back home.' },
 ];
 
 const CRAFT = [
   { num: '01', tag: 'Drawing',  name: 'Sketched by hand',  desc: 'Every commission begins on paper, in the studio, with the person who will wear it. No CAD until the line is right.', image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=900&q=85&auto=format&fit=crop' },
   { num: '02', tag: 'Sourcing', name: 'Stones, certified', desc: 'GIA / GRS reports on every coloured stone above one carat. Our buyer travels to the source twice a year for the rough.', image: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=900&q=85&auto=format&fit=crop' },
-  { num: '03', tag: 'Setting',  name: 'BIS 916 hallmarked', desc: '22K and 18K, struck to standard at the Mumbai assay office. Every gram of gold accounted for, on paper, on request.', image: 'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=900&q=85&auto=format&fit=crop' },
+  { num: '03', tag: 'Setting',  name: 'BIS 916 hallmarked', desc: '22K and 18K, struck to standard and hallmarked. Every gram of gold accounted for, on paper, on request.', image: 'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=900&q=85&auto=format&fit=crop' },
 ];
 
 const TESTIMONIALS = [
@@ -90,7 +90,7 @@ export default function MobileHome() {
           </h1>
           <div className="sub">रत्न जो कहानी कहें · सोना जो मन को छुए</div>
           <p className="body">
-            A family atelier for hand-sketched Indian jewellery. Naturally-sourced stones, hallmarked 22K &amp; 18K gold, set in our Jaipur workshop.
+            A family atelier for hand-sketched Indian jewellery. Naturally-sourced stones, hallmarked 22K &amp; 18K gold, set in our Nahan workshop.
           </p>
           <div className="actions">
             <Link to="/custom" className="m-btn m-btn-gold m-btn-full">
@@ -360,14 +360,14 @@ export default function MobileHome() {
         </div>
         <div className="meta">
           <div>
-            <div className="k">Showroom</div>
-            <div className="v">MG Road, Bangalore</div>
-            <div className="s">Mon–Sat · 11–8</div>
+            <div className="k">Studio</div>
+            <div className="v">Nahan, Himachal Pradesh</div>
+            <div className="s">Mon–Sat · 11–8 · By appointment</div>
           </div>
           <div>
-            <div className="k">Atelier</div>
-            <div className="v">Johari Bazaar, Jaipur</div>
-            <div className="s">By appointment</div>
+            <div className="k">Reply within the hour</div>
+            <div className="v">WhatsApp a designer</div>
+            <div className="s">7 days · +91 98160 24887</div>
           </div>
         </div>
       </section>
